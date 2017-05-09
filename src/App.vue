@@ -17,7 +17,12 @@ export default {
   box-sizing: border-box;
 }
 
+html {
+  height: auto;
+}
+
 body {
+  height: 100%;
   margin: 0;
 }
 
@@ -26,7 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 80px;
+  margin: 90px 0 40px;
 }
 
 h1, h2, h3, h4, p {
@@ -36,7 +41,7 @@ h1, h2, h3, h4, p {
 .container {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 20px;
+  padding: 0 25px;
 }
 
 .logo {
@@ -44,8 +49,8 @@ h1, h2, h3, h4, p {
   font-size: 28px;
   letter-spacing: -2px;
   position: absolute;
-  left: 20px;
-  top: 15px;
+  left: 30px;
+  top: 20px;
 }
 
 img {
@@ -55,6 +60,7 @@ img {
 .btn {
   border: 0;
   cursor: pointer;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-size: 16px;
   padding: 10px;
   text-decoration: none;
@@ -68,8 +74,8 @@ img {
 .btn--check {
   background: #333;
   color: #fff;
-  font-size: 11px;
-  letter-spacing: 3px;
+  font-size: 10px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
@@ -84,8 +90,9 @@ img {
 }
 
 input[type=text] {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   display: block;
-  font-size: 16px;
+  font-size: 15px;
   padding: 10px;
   width: 100%;
 }
@@ -94,6 +101,7 @@ input[type=text] {
   font-size: 28px;
   letter-spacing: -1px;
   text-align: left;
+  margin-bottom: 35px;
 }
 
 </style>
