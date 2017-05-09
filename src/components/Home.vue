@@ -34,6 +34,7 @@ export default {
       this.$http.get('https://api.themoviedb.org/3/movie/popular?api_key=9b1a22b01884b889ed192ba89db7edeb&language=en-US&page=1')
         .then(response => {
           this.films = response.data.results
+          console.log(response.data.results)
         }, response => {
           this.error = response.statusText
         })
