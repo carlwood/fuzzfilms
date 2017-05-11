@@ -24,7 +24,6 @@
         <form @submit.prevent="submitAnswer" v-bind:data-index="index">
           <input type="text" placeholder="Type film here..." v-model="filmInput[index]" v-on:keyup.enter="submitAnswer">
           <button type="submit" class="btn btn--check btn--block">Check</button>
-
         </form>
       </li>
 
@@ -44,9 +43,7 @@ export default {
       error: '',
       imgBaseUrl: 'http://image.tmdb.org/t/p/w780/',
       filmInput: {},
-      correct: '',
-      isCorrect: false,
-      wrong: ''
+      isCorrect: false
     }
   },
   methods: {
@@ -58,27 +55,28 @@ export default {
           this.error = response.statusText
         })
     },
+
     getBackdrop (index) {
       return this.imgBaseUrl + this.films[index].backdrop_path
     },
+
     submitAnswer (e) {
-      // console.log(this.index)
+      // @todo: change. pressing <enter> breaks this
       const index = e.target.dataset.index
 
       let title = this.films[index].title.toUpperCase()
       let input = this.filmInput[index].toUpperCase()
 
       if (title === input) {
-        // this.filmInput[index].isCorrect = true;
-        console.log(this.films[index])
+        // Add isCorrect property to film object
         this.$set(this.films[index], 'isCorrect', true)
-        this.correct = 'well done'
       } else {
         this.isWrong = true
         return false
       }
     }
   },
+
   mounted () {
     this.fetchFilms()
   }
