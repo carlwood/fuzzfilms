@@ -31,7 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin: 90px 0 40px;
+  margin: 20px 0;
 }
 
 h1, h2, h3, h4, p {
@@ -46,11 +46,15 @@ h1, h2, h3, h4, p {
 
 .logo {
   color: #e0822c;
-  font-size: 28px;
-  letter-spacing: -2px;
-  position: absolute;
+  display: flex;
+  font-size: 6vw;
+  text-transform: uppercase;
   left: 30px;
   top: 20px;
+  opacity: 0.6;
+  text-align: center;
+  justify-content: space-between;
+  border-bottom: solid 10px #e0822c;
 }
 
 img {
