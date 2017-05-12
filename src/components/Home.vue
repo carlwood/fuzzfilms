@@ -19,8 +19,8 @@
         v-bind:class="{ correct: film.isCorrect }">
         <div class="cover-img">
           <img v-bind:src="getBackdrop(index)">
+          <div class="film-title">{{ film.title }}</div>
         </div>
-        <p>{{ film.title }}</p>
         <form @submit.prevent="submitAnswer" v-bind:data-index="index">
           <input type="text" placeholder="Type film here..." v-model="filmInput[index]" v-on:keyup.enter="submitAnswer">
           <button type="submit" class="btn btn--check btn--block">Check</button>
@@ -94,25 +94,42 @@ export default {
 }
 
 .cover-img:after {
+  content: 'Correct!';
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  transition: all 0.4s;
+  transition: transform 0.4s;
   transform: translateY(-100%);
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  z-index: 5;
 }
 
 .correct .cover-img:after {
-  content: 'Correct!';
-  z-index: 5;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  color: #fff;
   transform: translateY(0%);
-  transition: all 0.4s;
+}
+
+.film-title {
+  background: #000;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem 1rem;
+  transform: translateY(100%);
+  text-align: center;
+  transition: transform 0.4s 0.5s;
+  z-index: 10;
+  width: 100%;
+}
+
+.correct .film-title {
+  transform: translateY(0%);
 }
 
 @media (min-width: 680px) {
