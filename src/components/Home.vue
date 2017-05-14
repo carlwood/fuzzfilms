@@ -22,7 +22,7 @@
           <div class="film-title">{{ film.title }}</div>
         </div>
         <form @submit.prevent="submitAnswer(index)" v-bind:data-index="index">
-          <input type="text" placeholder="Type film here..." v-model="filmInput[index]" v-on:keyup.enter="submitAnswer">
+          <input type="text" placeholder="Type film here..." v-model.trim="filmInput[index]">
           <button type="submit" class="btn btn--check btn--block">Check</button>
         </form>
       </li>
