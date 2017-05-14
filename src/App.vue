@@ -99,6 +99,7 @@ input[type=text] {
   font-size: 15px;
   padding: 10px;
   width: 100%;
+  border: solid 1px #ccc;
 }
 
 .page-title {

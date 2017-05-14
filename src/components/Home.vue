@@ -16,12 +16,12 @@
       <li v-for="(film, index) in films" 
         v-if="film.backdrop_path"
         v-bind:index="index"
-        v-bind:class="{ correct: film.isCorrect }">
+        v-bind:class="{ 'is-correct': film.isCorrect, 'is-wrong': film.isWrong }">
         <div class="cover-img">
           <img v-bind:src="getBackdrop(index)">
           <div class="film-title">{{ film.title }}</div>
         </div>
-        <form @submit.prevent="submitAnswer" v-bind:data-index="index">
+        <form @submit.prevent="submitAnswer(index)" v-bind:data-index="index">
           <input type="text" placeholder="Type film here..." v-model="filmInput[index]" v-on:keyup.enter="submitAnswer">
           <button type="submit" class="btn btn--check btn--block">Check</button>
         </form>
@@ -43,7 +43,8 @@ export default {
       error: '',
       imgBaseUrl: 'http://image.tmdb.org/t/p/w780/',
       filmInput: {},
-      isCorrect: false
+      isCorrect: false,
+      isWrong: false
     }
   },
   methods: {
@@ -60,10 +61,7 @@ export default {
       return this.imgBaseUrl + this.films[index].backdrop_path
     },
 
-    submitAnswer (e) {
-      // @todo: change. pressing <enter> breaks this
-      const index = e.target.dataset.index
-
+    submitAnswer (index) {
       let title = this.films[index].title.toUpperCase()
       let input = this.filmInput[index].toUpperCase()
 
@@ -71,8 +69,11 @@ export default {
         // Add isCorrect property to film object
         this.$set(this.films[index], 'isCorrect', true)
       } else {
-        this.isWrong = true
-        return false
+        this.$set(this.films[index], 'isWrong', true)
+        let that = this
+        setTimeout(function () {
+          that.$set(that.films[index], 'isWrong', false)
+        }, 1800)
       }
     }
   },
@@ -85,7 +86,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 .covers {
   display: grid;
@@ -105,12 +106,12 @@ export default {
   transform: translateY(-100%);
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.8);
+  background: rgba(88, 158, 83, 0.8);
   color: #fff;
   z-index: 5;
 }
 
-.correct .cover-img:after {
+.is-correct .cover-img:after {
   transform: translateY(0%);
 }
 
@@ -128,8 +129,15 @@ export default {
   width: 100%;
 }
 
-.correct .film-title {
+.is-correct .film-title {
   transform: translateY(0%);
+}
+
+.is-wrong input[type='text'] {
+  border-color: red;
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  outline: none;
 }
 
 @media (min-width: 680px) {
@@ -153,5 +161,23 @@ export default {
 .list--unstyled {
   list-style: none;
   padding: 0;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
