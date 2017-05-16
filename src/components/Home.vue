@@ -14,10 +14,10 @@
     <ul class="covers list--unstyled" v-if="films">
 
       <li v-for="(film, index) in films" 
-        v-if="film.backdrop_path"
+        v-if="index < 12"
         v-bind:index="index"
         v-bind:class="{ 'is-correct': film.isCorrect, 'is-wrong': film.isWrong }">
-        <div class="cover-img">
+        <div class="cover-img" v-if="film.backdrop_path">
           <img v-bind:src="getBackdrop(index)">
           <div class="film-title">{{ film.title }}</div>
         </div>
@@ -65,8 +65,6 @@ export default {
       let title = this.films[index].title.toLowerCase().replace(/[. ,:-]+/g, '')
       let input = this.filmInput[index].toLowerCase().replace(/[. ,:-]+/g, '')
 
-      console.log(title, input)
-
       if (title === input) {
         // Add isCorrect property to film object
         this.$set(this.films[index], 'isCorrect', true)
@@ -88,7 +86,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+
+form {
+  transition: 0.4s opacity ease;
+}
 
 .covers {
   display: grid;
@@ -117,6 +119,18 @@ export default {
   transform: translateY(0%);
 }
 
+.is-correct input[type=text] {
+  pointer-events: none;
+}
+
+.is-correct form {
+  opacity: 0.3;
+}
+
+.is-correct .btn--check {
+  pointer-events: none;
+}
+
 .film-title {
   background: #000;
   color: #fff;
@@ -142,13 +156,13 @@ export default {
   outline: none;
 }
 
-@media (min-width: 680px) {
+@media (min-width: 720px) {
   .covers {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
   .covers {
     grid-template-columns: repeat(3, 1fr);
   }
