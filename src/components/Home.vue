@@ -62,8 +62,10 @@ export default {
     },
 
     submitAnswer (index) {
-      let title = this.films[index].title.toUpperCase()
-      let input = this.filmInput[index].toUpperCase()
+      let title = this.films[index].title.toLowerCase().replace(/[. ,:-]+/g, '')
+      let input = this.filmInput[index].toLowerCase().replace(/[. ,:-]+/g, '')
+
+      console.log(title, input)
 
       if (title === input) {
         // Add isCorrect property to film object
