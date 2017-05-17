@@ -22,8 +22,8 @@
           <div class="film-title">{{ film.title }}</div>
         </div>
         <form @submit.prevent="submitAnswer(index)" v-bind:data-index="index">
-          <input type="text" placeholder="Type film here..." v-model.trim="filmInput[index]">
-          <button type="submit" class="btn btn--check btn--block">Check</button>
+          <input type="text" placeholder="Type film here..." v-model.trim="filmInput[index]" v-bind:disabled="film.isCorrect">
+          <button type="submit" class="btn btn--check btn--block" v-bind:disabled="film.isCorrect">Check</button>
         </form>
       </li>
 
@@ -89,7 +89,7 @@ export default {
 <style>
 
 form {
-  transition: 0.4s opacity ease;
+  transition: 0.8s opacity ease 0.6s;
 }
 
 .covers {
@@ -106,7 +106,7 @@ form {
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.4s;
+  transition: transform 0.4s 0.2s;
   transform: translateY(-100%);
   justify-content: center;
   align-items: center;
@@ -119,16 +119,8 @@ form {
   transform: translateY(0%);
 }
 
-.is-correct input[type=text] {
-  pointer-events: none;
-}
-
 .is-correct form {
   opacity: 0.3;
-}
-
-.is-correct .btn--check {
-  pointer-events: none;
 }
 
 .film-title {
@@ -140,7 +132,7 @@ form {
   padding: 0.5rem 1rem;
   transform: translateY(100%);
   text-align: center;
-  transition: transform 0.4s 0.5s;
+  transition: transform 0.4s 0.7s;
   z-index: 10;
   width: 100%;
 }
