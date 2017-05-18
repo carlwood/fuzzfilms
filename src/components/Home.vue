@@ -68,12 +68,9 @@ export default {
       if (title === input) {
         // Add isCorrect property to film object
         this.$set(this.films[index], 'isCorrect', true)
+        this.$set(this.films[index], 'isWrong', false)
       } else {
         this.$set(this.films[index], 'isWrong', true)
-        let that = this
-        setTimeout(function () {
-          that.$set(that.films[index], 'isWrong', false)
-        }, 1800)
       }
     }
   },
