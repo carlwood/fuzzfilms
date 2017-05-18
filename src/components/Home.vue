@@ -22,7 +22,7 @@
           <div class="film-title">{{ film.title }}</div>
         </div>
         <form @submit.prevent="submitAnswer(index)" v-bind:data-index="index">
-          <input type="text" placeholder="Type film here..." v-model.trim="filmInput[index]" v-bind:disabled="film.isCorrect">
+          <input type="text" placeholder="Type film here..." v-model.trim="filmInputs[index]" v-bind:disabled="film.isCorrect">
           <button type="submit" class="btn btn--check btn--block" v-bind:disabled="film.isCorrect">Check</button>
         </form>
       </li>
@@ -42,7 +42,7 @@ export default {
       films: '',
       error: '',
       imgBaseUrl: 'http://image.tmdb.org/t/p/w780/',
-      filmInput: {},
+      filmInputs: {},
       isCorrect: false,
       isWrong: false
     }
@@ -62,8 +62,8 @@ export default {
     },
 
     submitAnswer (index) {
-      let title = this.films[index].title.toLowerCase().replace(/[. ,:-]+/g, '')
-      let input = this.filmInput[index].toLowerCase().replace(/[. ,:-]+/g, '')
+      let title = this.films[index].title.toLowerCase().replace(/[. /,:-]+/g, '')
+      let input = this.filmInputs[index].toLowerCase().replace(/[. /,:-]+/g, '')
 
       if (title === input) {
         // Add isCorrect property to film object
